@@ -7,7 +7,7 @@ class MakeBlobs {
             direction = 1;
 
         //An array to store all the blob monsters
-        let blobs = [];
+        this.blobs = [];
 
         //Make as many blobs as there are `numberOfBlobs`
         for (let i = 0; i < numberOfBlobs; i++) {
@@ -37,10 +37,17 @@ class MakeBlobs {
             direction *= -1;
 
             //Push the blob into the `blobs` array
-            blobs.push(blob);
+            this.blobs.push(blob);
 
             //Add the blob to the `gameScene`
             gameScene.addChild(blob);
         }
+
+
     }
+
+    getBlobs(){
+        return this.blobs;
+    }
+
 }
