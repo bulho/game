@@ -138,11 +138,11 @@ function play(delta) {
     //the explorer, set `explorerHit` to `true`
     if (hitTestRectangle(explorer, blob)) {
       explorerHit = true;
-      console.log('hit!!');
+    } else {
+      explorerHit = false;
     }
 
     if (explorerHit) {
-
       //Make the explorer semi-transparent
       explorer.alpha = 0.5;
 
@@ -153,24 +153,24 @@ function play(delta) {
         state = end;
         message.text = "You lost!";
       }
-
-
     } else {
       //Make the explorer fully opaque (non-transparent) if it hasn't been hit
       explorer.alpha = 1;
     }
 
-    if (hitTestRectangle(treasure, door)) {
-      state = end;
-      message.text = "You won!";
-    }
-
-    if (hitTestRectangle(explorer, treasure)) {
-      treasure.x = explorer.x + 8;
-      treasure.y = explorer.y + 8;
-    }
-
   });
+
+  //Test for successful explorer taking treasure to door
+  if (hitTestRectangle(treasure, door)) {
+    state = end;
+    message.text = "You won!";
+  }
+
+  //Test for explorer taking treasure
+  if (hitTestRectangle(explorer, treasure)) {
+    treasure.x = explorer.x + 8;
+    treasure.y = explorer.y + 8;
+  }
 
 }
 
