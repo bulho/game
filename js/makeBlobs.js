@@ -32,7 +32,7 @@ class MakeBlobs {
             //move up. Multiplying `direction` by `speed` determines the blob's
             //vertical direction
             blob.vy = speed * direction;
-
+            blob.vx = speed * direction;
             //Reverse the direction for the next blob
             direction *= -1;
 

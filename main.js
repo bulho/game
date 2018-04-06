@@ -113,6 +113,14 @@ function gameLoop(delta) {
   state(delta);
 }
 
+let blobvxMult = 0;
+
+setInterval(function(){
+  if(blobvxMult === 0 && randomInt(0,100)>50){
+    blobvxMult = 1;
+  } else blobvxMult = 0;
+},2000);
+
 function play(delta) {
   //Move
   explorer.x += explorer.vx;
@@ -124,6 +132,7 @@ function play(delta) {
 
     //Move the blob
     blob.y += blob.vy;
+    blob.x += blob.vx * blobvxMult;
 
     //Check the blob's screen boundaries
     let blobHitsWall = contain(blob, { x: 28, y: 10, width: 488, height: 480 });
@@ -132,6 +141,12 @@ function play(delta) {
     //its direction
     if (blobHitsWall === "top" || blobHitsWall === "bottom") {
       blob.vy *= -1;
+    }
+
+    //If the blob hits the left or right of the stage, reverse
+    //its direction
+    if (blobHitsWall === "left" || blobHitsWall === "right") {
+      blob.vx *= -1;
     }
 
     //Test for a collision. If any of the enemies are touching
