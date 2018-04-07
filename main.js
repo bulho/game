@@ -113,13 +113,15 @@ function gameLoop(delta) {
   state(delta);
 }
 
-let blobvxMult = 0;
+let randomDirectionX = [1,1,1,1,1,1],
+    randomDirectionY = [1,1,1,1,1,1];
 
 setInterval(function(){
-  if(blobvxMult === 0 && randomInt(0,100)>50){
-    blobvxMult = 1;
-  } else blobvxMult = 0;
-},2000);
+  randomDirectionX.forEach((i,idx)=>{
+    randomDirectionX[idx] = randomInt(-1,1);
+    randomDirectionY[idx] = randomInt(-1,1);
+  });
+},500);
 
 function play(delta) {
   //Move
@@ -128,11 +130,11 @@ function play(delta) {
   contain(explorer, { x: 28, y: 10, width: 488, height: 480 });
 
   //Move Blobs
-  blobs.forEach(function (blob) {
+  blobs.forEach(function (blob,idx) {
 
     //Move the blob
-    blob.y += blob.vy;
-    blob.x += blob.vx * blobvxMult;
+    blob.y += blob.vy * randomDirectionY[idx];
+    blob.x += blob.vx * randomDirectionX[idx];
 
     //Check the blob's screen boundaries
     let blobHitsWall = contain(blob, { x: 28, y: 10, width: 488, height: 480 });
