@@ -16,8 +16,8 @@ let app = new Application({
   antialiasing: true,
   transparent: false,
   resolution: 1
-}
-);
+});
+
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
 loader
@@ -133,7 +133,7 @@ function play(delta) {
   blobs.forEach(function (blob,idx) {
 
     //Move the blob
-    blob.y += blob.vy * randomDirectionY[idx];
+    blob.y += blob.vy;// * randomDirectionY[idx];
     blob.x += blob.vx * randomDirectionX[idx];
 
     //Check the blob's screen boundaries
